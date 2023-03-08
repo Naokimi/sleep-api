@@ -1,24 +1,37 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# API Endpoints
 
-Things you may want to cover:
+## User
 
-* Ruby version
+### #create
+Creates a user
 
-* System dependencies
+**Request**
+`POST /api/v1/users`
+```
+curl -i -X POST http://localhost:3000/api/v1/users -d 'user[name]=Bob'
+```
 
-* Configuration
+**Response**
+```
+HTTP/1.1 201 Created
 
-* Database creation
+{"user":{"id":6,"name":"Bob","created_at":"2023-03-08T08:20:32.518Z","updated_at":"2023-03-08T08:20:32.518Z"}}
+```
 
-* Database initialization
+### #destroy
+Deletes a user
 
-* How to run the test suite
+**Request**
+`DELTE /api/v1/users/:id`
+```
+curl -i -X DELETE http://localhost:3000/api/v1/users/6
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+**Response**
+```
+HTTP/1.1 200 OK
 
-* Deployment instructions
-
-* ...
+{"message":"User 6 successfully deleted"}
+```
