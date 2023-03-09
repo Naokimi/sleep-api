@@ -24,6 +24,13 @@ module Api
         render json: { sleep_sessions: sleep_sessions }, status: :ok
       end
 
+      def friends
+        sleep_sessions = SleepSession.where(user_id: @user.followed_user_ids, created_at: 1.week.ago..Time.now)
+                                     .where.not(length: nil)
+                                     .order(length: :desc)
+        render json: { sleep_sessions: sleep_sessions }, status: :ok
+      end
+
       private
 
       def set_user

@@ -88,4 +88,26 @@ describe Api::V1::SleepSessionsController, type: :controller do
       expect(sleep_sessions.first['created_at']).to be > sleep_sessions.last['created_at']
     end
   end
+
+  describe '#friends' do
+    let(:followed_user) { FactoryBot.create(:user) }
+
+    subject { get :friends, params: { user_id: user_id }, format: :json }
+
+    before do
+      Relationship.create(followed: followed_user, follower: user)
+      FactoryBot.create(:sleep_session, user: followed_user, created_at: 2.years.ago, length: 100)
+      FactoryBot.create(:sleep_session, user: followed_user, created_at: 2.days.ago)
+      FactoryBot.create(:sleep_session, user: followed_user, length: 10)
+    end
+
+    it 'returns sleep sessions up to 1 week old for the users followed by the given user' do
+      expect(SleepSession.count).to eq(3)
+      subject
+      expect(response).to have_http_status(:ok)
+      sleep_sessions = JSON.parse(response.body)['sleep_sessions']
+      expect(sleep_sessions.length).to eq(2)
+      expect(sleep_sessions.first['length']).to be > sleep_sessions.last['length']
+    end
+  end
 end

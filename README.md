@@ -119,3 +119,19 @@ HTTP/1.1 200 OK
 
 {"sleep_sessions":[{"id":2,"ended_at":"2023-03-09T07:06:59.543Z","user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":21}]}
 ```
+
+### #friends
+Lists sleep sessions up to 1 week old for the users followed by the given user
+
+**Request**
+`GET /api/v1/users/:user_id/sleep_sessions/friends`
+```
+curl -i http://localhost:3000/api/v1/users/8/sleep_sessions/friends
+```
+
+**Response**
+```
+HTTP/1.1 200 OK
+
+{"sleep_sessions":[{"id":2,"ended_at":"2023-03-09T07:06:59.543Z","user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":21},{"id":4,"ended_at":"2023-03-09T07:07:36.559Z","user_id":5,"created_at":"2023-03-09T07:07:32.255Z","updated_at":"2023-03-09T07:07:36.560Z","length":4}]}
+```
