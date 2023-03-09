@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           collection do
             post 'clock_in', to: 'sleep_sessions#clock_in'
             patch 'clock_out', to: 'sleep_sessions#clock_out'
+            get 'friends', to: 'sleep_sessions#friends'
           end
         end
       end

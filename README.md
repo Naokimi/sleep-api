@@ -24,7 +24,7 @@ HTTP/1.1 201 Created
 Deletes a user
 
 **Request**
-`DELTE /api/v1/users/:id`
+`DELETE /api/v1/users/:id`
 ```
 curl -i -X DELETE http://localhost:3000/api/v1/users/6
 ```
@@ -58,7 +58,7 @@ HTTP/1.1 201 Created
 User unfollows another user
 
 **Request**
-`DELTE /api/v1/users/:user_id/unfollow/:follower_id`
+`DELETE /api/v1/users/:user_id/unfollow/:follower_id`
 ```
 curl -i -X DELETE http://localhost:3000/api/v1/users/5/unfollow/8'
 ```
@@ -85,7 +85,7 @@ curl -i -X POST http://localhost:3000/api/v1/users/5/sleep_sessions/clock_in
 ```
 HTTP/1.1 201 Created
 
-{"sleep_session":{"id":1,"ended_at":null,"user_id":5,"created_at":"2023-03-08T09:13:10.760Z","updated_at":"2023-03-08T09:13:10.760Z"}}
+{"sleep_session":{"id":2,"ended_at":null,"user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":null}}
 ```
 
 ### #clock_out
@@ -101,7 +101,7 @@ curl -i -X PATCH http://localhost:3000/api/v1/users/5/sleep_sessions/clock_out
 ```
 HTTP/1.1 200 OK
 
-{"sleep_session":{"user_id":5,"ended_at":"2023-03-09T04:20:21.333Z","id":1,"created_at":"2023-03-08T09:13:10.760Z","updated_at":"2023-03-09T04:20:21.333Z"}}
+{"sleep_session":{"id":2,"ended_at":"2023-03-09T07:06:59.543Z","user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":21}}
 ```
 
 ### #index
@@ -110,12 +110,28 @@ Lists all sleep sessions for the given user
 **Request**
 `GET /api/v1/users/:user_id/sleep_sessions`
 ```
-curl -i GET http://localhost:3000/api/v1/users/5/sleep_sessions
+curl -i http://localhost:3000/api/v1/users/5/sleep_sessions
 ```
 
 **Response**
 ```
 HTTP/1.1 200 OK
 
-{"sleep_sessions":[{"id":1,"ended_at":"2023-03-09T04:20:21.333Z","user_id":5,"created_at":"2023-03-08T09:13:10.760Z","updated_at":"2023-03-09T04:20:21.333Z"}]}
+{"sleep_sessions":[{"id":2,"ended_at":"2023-03-09T07:06:59.543Z","user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":21}]}
+```
+
+### #friends
+Lists sleep sessions up to 1 week old for the users followed by the given user
+
+**Request**
+`GET /api/v1/users/:user_id/sleep_sessions/friends`
+```
+curl -i http://localhost:3000/api/v1/users/8/sleep_sessions/friends
+```
+
+**Response**
+```
+HTTP/1.1 200 OK
+
+{"sleep_sessions":[{"id":2,"ended_at":"2023-03-09T07:06:59.543Z","user_id":5,"created_at":"2023-03-09T07:06:37.891Z","updated_at":"2023-03-09T07:06:59.544Z","length":21},{"id":4,"ended_at":"2023-03-09T07:07:36.559Z","user_id":5,"created_at":"2023-03-09T07:07:32.255Z","updated_at":"2023-03-09T07:07:36.560Z","length":4}]}
 ```

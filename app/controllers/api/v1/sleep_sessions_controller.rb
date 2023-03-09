@@ -14,12 +14,20 @@ module Api
       def clock_out
         return render_error("There is no active sleep session for user #{@user.id}") unless @sleep_session
 
-        @sleep_session.update(ended_at: Time.now)
+        ended_at = Time.now
+        @sleep_session.update(ended_at: ended_at, length: ended_at - @sleep_session.created_at)
         render json: { sleep_session: @sleep_session }, status: :ok
       end
 
       def index
         sleep_sessions = @user.sleep_sessions.order(created_at: :desc)
+        render json: { sleep_sessions: sleep_sessions }, status: :ok
+      end
+
+      def friends
+        sleep_sessions = SleepSession.where(user_id: @user.followed_user_ids, created_at: 1.week.ago..Time.now)
+                                     .where.not(length: nil)
+                                     .order(length: :desc)
         render json: { sleep_sessions: sleep_sessions }, status: :ok
       end
 
