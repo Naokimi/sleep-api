@@ -1,5 +1,31 @@
 # README
 
+### Prerequisites
+
+- Ruby 3.2.1
+- gem rails 7.0.4.2
+- gem bundler 2.4.7
+- PostgreSQL 12.13
+
+I recommend following [LeWagon's setup](https://github.com/lewagon/setup) to get your environment ready, but you'll probably have to install the required ruby version with rbenv
+
+### Set up
+
+Start in your folder with dev projects and run the following commands:
+
+- `gh repo clone Naokimi/sleep-api`
+- `cd sleep-api`
+- `bundle install`
+- `rails db:create db:migrate`
+
+### Running
+
+Start in the project folder and run the following command:
+
+- `rails s`
+
+The server listens on port 3000.
+
 # API Endpoints
 
 ## User
