@@ -14,7 +14,8 @@ module Api
       def clock_out
         return render_error("There is no active sleep session for user #{@user.id}") unless @sleep_session
 
-        @sleep_session.update(ended_at: Time.now)
+        ended_at = Time.now
+        @sleep_session.update(ended_at: ended_at, length: ended_at - @sleep_session.created_at)
         render json: { sleep_session: @sleep_session }, status: :ok
       end
 
