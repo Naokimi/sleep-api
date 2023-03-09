@@ -24,7 +24,7 @@ HTTP/1.1 201 Created
 Deletes a user
 
 **Request**
-`DELTE /api/v1/users/:id`
+`DELETE /api/v1/users/:id`
 ```
 curl -i -X DELETE http://localhost:3000/api/v1/users/6
 ```
@@ -58,7 +58,7 @@ HTTP/1.1 201 Created
 User unfollows another user
 
 **Request**
-`DELTE /api/v1/users/:user_id/unfollow/:follower_id`
+`DELETE /api/v1/users/:user_id/unfollow/:follower_id`
 ```
 curl -i -X DELETE http://localhost:3000/api/v1/users/5/unfollow/8'
 ```
@@ -110,7 +110,7 @@ Lists all sleep sessions for the given user
 **Request**
 `GET /api/v1/users/:user_id/sleep_sessions`
 ```
-curl -i GET http://localhost:3000/api/v1/users/5/sleep_sessions
+curl -i http://localhost:3000/api/v1/users/5/sleep_sessions
 ```
 
 **Response**
