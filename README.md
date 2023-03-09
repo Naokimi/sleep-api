@@ -36,6 +36,40 @@ HTTP/1.1 200 OK
 {"message":"User 6 successfully deleted"}
 ```
 
+## Relationship
+
+### #follow
+User follows another user
+
+**Request**
+`POST /api/v1/users/:user_id/follow/:follower_id`
+```
+curl -i -X POST http://localhost:3000/api/v1/users/5/follow/8'
+```
+
+**Response**
+```
+HTTP/1.1 201 Created
+
+{"message":"User 8 is now following user 5"}
+```
+
+### #unllow
+User unfollows another user
+
+**Request**
+`DELTE /api/v1/users/:user_id/unfollow/:follower_id`
+```
+curl -i -X DELETE http://localhost:3000/api/v1/users/5/unfollow/8'
+```
+
+**Response**
+```
+HTTP/1.1 200 OK
+
+{"message":"User 8 stopped following user 5"}
+```
+
 ## Sleep Session
 
 ### #clock_in
